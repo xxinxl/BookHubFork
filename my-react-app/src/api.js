@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-
 const api = axios.create({
-    baseURL: `${BASE_URL}/api/`,
+    baseURL: 'http://127.0.0.1:8000/api/',
 });
 
 api.interceptors.request.use(
@@ -22,13 +20,13 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
 
             try {
                 const refreshToken = localStorage.getItem('refresh');
                 
-                const response = await axios.post(`${BASE_URL}/api/token/refresh/`, {
+                const response = await axios.post('http://127.0.0.1:8000/api/token/refresh/', {
                     refresh: refreshToken
                 });
 
