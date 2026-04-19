@@ -71,14 +71,3 @@ python manage.py check
 python manage.py test
 cd my-react-app && npm run build
 ```
-
-## Деплой
-
-Проект подготовлен к деплою через `Render`.
-
-Для деплоя используются:
-
-- `render.yaml`
-- `Dockerfile`
-- PostgreSQL
-- production-настройки Django

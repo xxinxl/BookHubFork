@@ -24,4 +24,4 @@ COPY --from=frontend-build /app/my-react-app/dist /app/my-react-app/dist
 
 RUN python manage.py collectstatic --noinput
 
-CMD ["sh", "-c", "gunicorn backend.wsgi:application --bind 0.0.0.0:${PORT:-10000} --workers 3"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py loaddata demo_data.json && gunicorn backend.wsgi:application --bind 0.0.0.0:${PORT:-10000} --workers 3"]
